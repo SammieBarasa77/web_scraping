@@ -23,11 +23,13 @@ This project demonstrates the use of **BeautifulSoup** for web scraping to extra
     - [Step 5: Extract Data from the Table](#step-5-extract-data-from-the-table)  
     - [Step 6: Convert to DataFrame](#step-6-convert-to-dataframe)  
     - [Step 7: Clean the Data](#step-7-clean-the-data)  
-    - [Step 8: Save the Data](#step-8-save-the-data)  
-6. [Results](#results)  
-7. [Insights and Observations](#insights-and-observations)  
-8. [Future Work](#future-work)  
-9. [Acknowledgments](#acknowledgments)
+    - [Step 8: Save the Data](#step-8-save-the-data)
+    - [Step 9: Exploratory Data Analysis and Advanced Analysis](#step-9-exploratory-data-analysis-and-advanced-analysis)
+6. [Dashboard](#dashboard)
+7. [Results](#results)  
+8. [Insights and Observations](#insights-and-observations)  
+9. [Future Work](#future-work)  
+10. [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -43,12 +45,6 @@ To extract and analyze data from Wikipedia, focusing on private companies' reven
 - pandas  
 - requests  
 
-```python
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-```
-
 ## Dataset Source
 The dataset was scraped from the [Wikipedia page](https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue).
 
@@ -57,6 +53,11 @@ The dataset was scraped from the [Wikipedia page](https://en.wikipedia.org/wiki/
 ### Step 1: Import Necessary Libraries
 Import libraries like `requests`, `BeautifulSoup`, and `pandas` to handle HTTP requests, parse HTML, and structure data.
 
+```python
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+```
 ### Step 2: Fetch the Web Page Content
 Use the `requests` library to fetch the HTML content of the webpage.
 
@@ -66,6 +67,7 @@ page = requests.get(url)
 soup = BeautifulSoup(page.text, 'html')
 print(soup)
 ```
+![Soup](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/soup_1.png)
 
 ### Step 3: Parse the HTML Content
 
@@ -74,17 +76,23 @@ Finding all tables availabe on the webpage for easier HTML structure navigation.
 ```python
 soup.find_all('table')
 ```
+![Soup](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/soup_2.png)
+
 ### Step 4: Locate the Desired Table
-Identify and locate **Table 2** containing the data on the largest private companies by revenue.
+Identify and locate **Table 1** containing the data on the largest private companies by revenue.
 
 ```python
 #Finding the first table (List of companies)from the page using indexing 
 soup.find_all('table')[0]
 ```
+![table](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/findall_table.png)
+
 Finding the desired table
 ```python
 table = soup.find_all('table')[0]
+print(table)
 ```
+![table](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/findall_table.png)
 
 ### Step 5: Extract Data from the Table
 Extract table rows, headers, and cell data 
@@ -93,15 +101,19 @@ Printing table headlines
 ```python
 world_titles = table.find_all('th')
 ```
+
 Printing titles
 ```python
 print(world_titles)
 ```
+![world titles](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/world_titles.png)
+
 Table titles in a row
 ```python
 world_table_titles = [title.text.strip() for title in world_titles]
 print(world_table_titles )
 ```
+![world titles](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/wwww_titles.png)
 
 ### Step 6: Convert to DataFrame
 Convert the extracted data into a structured pandas DataFrame.
@@ -111,6 +123,8 @@ Titles
 df = pd.DataFrame(columns = world_table_titles)
 df
 ```
+![Dataframe titles](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/column_dataframe.png)
+
 Whole data into DataFrame
 ```python
 column_data = table.find_all('tr')
@@ -120,6 +134,8 @@ for row in column_data:
     individual_row_data = [data.text.strip() for data in row_data]
     print(individual_row_data)
 ```
+![Column Data](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/column_data.png)
+
 ### Step 7: Clean the Data
 Perform data cleaning steps such as removing unwanted characters, handling missing values, and formatting data.
 ```python
@@ -147,13 +163,15 @@ for row in column_data[1:]:
     length = len(df)
     df.loc[length] = individual_row_data
 ```
+![Data](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/column_data.png)
+
 ### Step 8: Save the Data
 Save the cleaned DataFrame to a CSV file for further analysis.
 ```python
 df.to_csv(r'C:\Users\samue\Documents\Web Scrapper\Top_Companies.csv', index=False)
 ```
 
-## Exploratory Data Analysis
+## Exploratory Data Analysis and Advanced Analysis
 Setting up Seaborn style for cleaner visuals
 ```python
 import matplotlib.pyplot as plt
@@ -177,6 +195,8 @@ print(df.dtypes)
 print("\nMissing Values:")
 print(df.isnull().sum())
 ```
+![Data Overview](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/data_overviw.png)
+
 Revenue Analysis
 ```python
 # Top Companies by Revenue
@@ -197,6 +217,8 @@ plt.title('Revenue Box Plot')
 
 plt.show()
 ```
+![Revenue Analysis](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/Revenue_analysis.png)
+
 Industry Revenue
 ```python
 # Plot Revenue by Industry
@@ -206,6 +228,8 @@ plt.title('Total Revenue by Industry')
 plt.xlabel('Total Revenue in Millions (USD)')
 plt.show()
 ```
+![Industry revenue](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/indusrty_analysis.png)
+
 Employee Analysis
 ```python
 # Employee Distribution (Histogram)
@@ -215,6 +239,8 @@ plt.title('Employee Count Distribution')
 plt.xlabel('Number of Employees')
 plt.show()
 ```
+![Employee Analysis](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/employee_distn.png)
+
 Employee Density
 ```python
 # Remove commas and convert the 'Employees' column to numeric, coercing errors to NaN
@@ -232,6 +258,8 @@ plt.ylabel('Industry')
 plt.title('Employee Density by Industry')
 plt.show()
 ```
+![Employee Density](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/employee_density.png)
+
 Revenue Per Employee
 ```python
 # Revenue per Employee
@@ -242,6 +270,9 @@ plt.title('Revenue per Employee Distribution')
 plt.xlabel('Revenue per Employee (USD)')
 plt.show()
 ```
+
+![Revenue Per Employee](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/revenue_per_emp.png)
+
 Industry Analysis
 ```python
 # Industry Popularity (Number of Companies per Industry)
@@ -252,6 +283,7 @@ plt.title('Number of Companies per Industry')
 plt.xlabel('Number of Companies')
 plt.show()
 ```
+![Industry Analysis](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/indusrty_analysis.png)
 
 ```python
 # Revenue and Employees by Industry
@@ -266,6 +298,10 @@ plt.title('Revenue Distribution by Industry')
 plt.show()
 
 ```
+![visual1](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/total_rev_emp_1.png)
+![visual2](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/total_rev_emp_2.png)
+![visual3](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/reve_distn_per_industry.png)
+
 Geographical Analysis
 ```python
 # Headquarters Analysis
@@ -275,8 +311,11 @@ sns.barplot(x=headquarters_count.values, y=headquarters_count.index)
 plt.title('Top Headquarters Locations')
 plt.xlabel('Number of Companies')
 plt.show()
+```
+![Geographical Analysis](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/geog_anaalysis.png)
 
-# Revenue by Location (State or City)
+!Revenue by Location (State or City)
+```python
 df['State'] = df['Headquarters'].apply(lambda x: x.split(',')[-1].strip())  # Extracting state if format is "City, State"
 revenue_by_state = df.groupby('State')['Revenue (USD millions)'].sum().sort_values(ascending=False).head(10)
 plt.figure(figsize=(10, 6))
@@ -284,8 +323,11 @@ sns.barplot(x=revenue_by_state.values, y=revenue_by_state.index)
 plt.title('Top 10 States by Total Revenue')
 plt.xlabel('Total Revenue (USD)')
 plt.show()
+```
+![State by Revenue](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/states_by_revenue.png)
 
-# Top Cities for Employment
+Top Cities for Employment
+```python
 employment_by_state = df.groupby('State')['Employees'].sum().sort_values(ascending=False).head(10)
 plt.figure(figsize=(10, 6))
 sns.barplot(x=employment_by_state.values, y=employment_by_state.index)
@@ -293,7 +335,10 @@ plt.title('Top 10 States by Total Employees')
 plt.xlabel('Total Employees')
 plt.show()
 ```
-Rank Vs Finances
+![Cities for employment](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/state_by_empl.png)
+
+Rank Vs Financials
+
 ```python
 # Rank vs. Revenue
 plt.figure(figsize=(8, 6))
@@ -302,8 +347,11 @@ plt.title('Rank vs Revenue')
 plt.xlabel('Rank')
 plt.ylabel('Revenue in Millions (USD)')
 plt.show()
+```
+![Rank vs Finacial](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/rank_vs_rev.png)
 
-# Rank vs. Employees
+Rank vs. Employees
+```python
 plt.figure(figsize=(8, 6))
 sns.scatterplot(x='Rank', y='Employees', data=df)
 plt.title('Rank vs Employees')
@@ -311,6 +359,7 @@ plt.xlabel('Rank')
 plt.ylabel('Number of Employees')
 plt.show()
 ```
+![Rank vs employees](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/rank_vs_emp.png)
 
 Comparing key metrics
 ```python
@@ -321,13 +370,18 @@ plt.title('Employees vs Revenue')
 plt.xlabel('Number of Employees')
 plt.ylabel('Revenue (USD)')
 plt.show()
+```
+![employees vs Rev](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/employee_vs_rev.png)
 
-# Distribution of Top Metrics (Violin Plot for Revenue)
+Distribution of Top Metrics (Violin Plot for Revenue)
+```python
 plt.figure(figsize=(8, 6))
 sns.violinplot(x=df['Revenue (USD millions)'])
 plt.title('Revenue Distribution')
 plt.show()
 ```
+![Violin Plot](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/reve_distn.png)
+
 Outlier Analysis
 ```python
 # Outliers in Revenue and Employees using Box Plot
@@ -343,14 +397,23 @@ plt.title('Employee Outliers')
 
 plt.show()
 ```
+![Outliers](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/Outlieir_analysis.png)
+
+## Dashboard
+Power BI Dashboard Screenshot
+![Dashboard](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/Screenshot%202024-11-18%20190031.png)
+
+Click this link to find the dashboard file:
 
 ## Results
 
 The extracted data includes a detailed list of the largest private companies in the United States by revenue, with columns such as Company Name, Revenue, and Industry.
 
 ## Insights and Observations
-- Key trends among top private companies by revenue.
-- Dominant industries and revenue distribution.
+
+Key trends among top private companies by revenue.
+
+Dominant industries and revenue distribution.
 
 ## Future Work
 - Scraping data for public companies for comparative analysis.
