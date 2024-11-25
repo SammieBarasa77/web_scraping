@@ -29,9 +29,8 @@ This project demonstrates the use of **BeautifulSoup** for web scraping to extra
 7. [Results](#results)  
 8. [Insights and Observations](#insights-and-observations)  
 9. [Future Work](#future-work)  
-10. [Acknowledgments](#acknowledgments)
 
----
+
 
 ## Introduction
 This project involves web scraping data on the **largest private companies by revenue** in the United States using BeautifulSoup. It demonstrates web scraping, data extraction, cleaning, and saving the data for further analysis.
@@ -421,5 +420,5 @@ Dominant industries and revenue distribution.
 - Scraping data for public companies for comparative analysis.
 - Automating the process for regular data updates.
 
-## Acknowledgments
+
 Would you like to do the same project too, scrape the data from the [source page](https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue).
