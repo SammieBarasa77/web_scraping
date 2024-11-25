@@ -153,7 +153,6 @@ for row in column_data[1:]:
     length = len(df)
     df.loc[length] = individual_row_data
 ```
-![Column Data](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/column_dataframe.png)
 
 
 Whole data into DataFrame
@@ -423,4 +422,4 @@ Dominant industries and revenue distribution.
 - Automating the process for regular data updates.
 
 ## Acknowledgments
-Special thanks to the Wikipedia contributors for maintaining the [source page](https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue).
+Would you like to do the same project too, scrape the data from the [source page](https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue).
