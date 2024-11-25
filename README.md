@@ -134,7 +134,7 @@ for row in column_data:
     individual_row_data = [data.text.strip() for data in row_data]
     print(individual_row_data)
 ```
-![Column Data](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/column_data.png)
+![Column Data](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/column_dataframe.png)
 
 ### Step 7: Clean the Data
 Perform data cleaning steps such as removing unwanted characters, handling missing values, and formatting data.
