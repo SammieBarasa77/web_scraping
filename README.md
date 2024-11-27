@@ -47,6 +47,8 @@ To extract and analyze data from Wikipedia, focusing on private companies' reven
 ## Dataset Source
 The dataset was scraped from the [Wikipedia page](https://en.wikipedia.org/wiki/List_of_largest_companies_in_the_United_States_by_revenue).
 
+Feel free to download the scraped data and make even further analysis: 'https://github.com/SammieBarasa77/web_scraping/blob/main/assets/docs/Top_Companies.csv'
+
 ## Procedure
 
 ### Step 1: Import Necessary Libraries
@@ -299,7 +301,6 @@ plt.title('Revenue Distribution by Industry')
 plt.show()
 
 ```
-![visual1](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/total_rev_emp_1.png)
 ![visual2](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/total_rev_emp_2.png)
 ![visual3](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/reve_distn_per_industry.png)
 
@@ -404,7 +405,7 @@ plt.show()
 Power BI Dashboard Screenshot
 ![Dashboard](https://github.com/SammieBarasa77/web_scraping/blob/main/assets/images/Screenshot%202024-11-18%20190031.png)
 
-Click this link to find the dashboard file:
+Download my Tableau Public Dashboard from here: 'https://github.com/SammieBarasa77/web_scraping/blob/main/assets/docs/Top%20US%20Companies.twb'
 
 ## Results
 
